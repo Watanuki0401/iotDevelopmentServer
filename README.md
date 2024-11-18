@@ -39,3 +39,10 @@
 14. `npx prisma db push; npx prisma generate`を実行する。
 15. `npm run dev`を実行する。
 16. 動作確認して動けば完了
+
+## ソースコードを取得する
+本コードは一部ページやそのコンポーネントが不足しています。
+コードダウンロード用ページからコードをダウンロードし、
+page.tsxはsrc/app/userに`mkdir dashboard`を行ったのち、page.tsxを配置してください。
+他２つ（場合によっては一つ）はcomponents直下に配置してください。
+これらがないと正常に起動しないので注意してください。
