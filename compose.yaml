@@ -1,0 +1,45 @@
+name: iot_dev_server
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        UID: 1003
+        GID: 1003
+    environment:
+      NODE_ENV: development
+    init: true
+    ports:
+      - "20080:3000"
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app/container-app
+    working_dir: /app/container-app
+    tty: true
+    command: bash -c "cd /app/container-app && npm install && npx prisma db push && npx prisma generate && npm run dev"
+  
+  db:
+    image: postgres:16.4-bullseye
+    volumes:
+      - type: bind
+        source: ./data
+        target: /var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: demodemo
+      POSTGRES_USER: demo
+      POSTGRES_DB: auth-practice
+
+  timestampdb:
+    image: influxdb:latest
+    volumes:
+      - type: bind
+        source: ./timestampdata
+        target: /var/lib/influxdb2
+      - type: bind
+        source: ./config
+        target: /etc/influxdb2
+    ports:
+      - "20086:8086"
