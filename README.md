@@ -22,18 +22,20 @@
    後者は共有ユーザやディレクトリを使用している際に競合を防ぐためディレクトリ名を任意に変更するものである。
 2. クローンしたディレクトリに移動。`cd ${clonedDirctoryName}`で移動可能。
 3. 不足しているディレクトリ郡を生成する。`mkdir config data timestampdata`を実行しディレクトリができたことを`ls`で確認してください。
-4. `compose.yaml`を編集する。
+4. `id`を実行しuidとgidを確認する。
+5. `compose.yaml`を編集する。
    - nameを任意の名称に変更（英小文字, _, -のみ使用可能）
    - 各コンテナのPortsを変更（使用中のポートと被らないようなポートを使用）
-5. `docker compose up -d`でコンテナを立ち上げる。
-6. `URI:timestampdbPort`でinfluxdbヘアクセス後、画面の案内に従いユーザを作成する。  \
+   - webコンテナ内のUID、GIDをstep. 4で確認したuid, gidに変更する。
+6. `docker compose up -d`でコンテナを立ち上げる。
+7. `URI:timestampdbPort`でinfluxdbヘアクセス後、画面の案内に従いユーザを作成する。  \
    この際にtokenが生成されるので必ずコピーして控えておく。
-7. `${name}-web-1`というコンテナをvsCodeで接続し、ターミナルを立ち上げる。
-8. `code /app/container-app -r`または`ファイル>フォルダーを開く`にて立ち上がる入力欄に、すでに入力されている内容を削除したうえで`/app/container-app`と入力しOKを押下する。
-9. `npm install`を実行し待つ。
-10. `npm auth secret`を実行し`.env.local`が生成されるのを待つ。
-11. `.env.local`に6で生成したtokenを`INFLUXDB_TOKEN="${token}"`として貼り付ける。
-12. `HOST_ADDRESS="URI:webPort"`と`HOST_INFLUX_ADDRESS="URI:timestampdataPort"`を`.env.local`を記入する。
-13. `npx prisma db push; npx prisma generate`を実行する。
-14. `npm run dev`を実行する。
-15. 動作確認して動けば完了
+8. `${name}-web-1`というコンテナをvsCodeで接続し、ターミナルを立ち上げる。
+9. `code /app/container-app -r`または`ファイル>フォルダーを開く`にて立ち上がる入力欄に、すでに入力されている内容を削除したうえで`/app/container-app`と入力しOKを押下する。
+10. `npm install`を実行し待つ。
+11. `npm auth secret`を実行し`.env.local`が生成されるのを待つ。
+12. `.env.local`に6で生成したtokenを`INFLUXDB_TOKEN="${token}"`として貼り付ける。
+13. `HOST_ADDRESS="URI:webPort"`と`HOST_INFLUX_ADDRESS="URI:timestampdataPort"`を`.env.local`を記入する。
+14. `npx prisma db push; npx prisma generate`を実行する。
+15. `npm run dev`を実行する。
+16. 動作確認して動けば完了

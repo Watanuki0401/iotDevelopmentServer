@@ -19,7 +19,7 @@ services:
         target: /app/container-app
     working_dir: /app/container-app
     tty: true
-    command: bash -c "cd /app/container-app && npm install && npx prisma db push && npx prisma generate && npm run dev"
+    # command: bash -c "cd /app/container-app && npm install && npx prisma db push && npx prisma generate && npm run dev"
   
   db:
     image: postgres:16.4-bullseye
