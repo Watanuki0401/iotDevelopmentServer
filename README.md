@@ -33,7 +33,7 @@
 8. `${name}-web-1`というコンテナをvsCodeで接続し、ターミナルを立ち上げる。
 9. `code /app/container-app -r`または`ファイル>フォルダーを開く`にて立ち上がる入力欄に、すでに入力されている内容を削除したうえで`/app/container-app`と入力しOKを押下する。
 10. `npm install`を実行し待つ。
-11. `npm auth secret`を実行し`.env.local`が生成されるのを待つ。
+11. `npx auth secret`を実行し`.env.local`が生成されるのを待つ。
 12. `.env.local`に6で生成したtokenを`INFLUXDB_TOKEN="${token}"`として貼り付ける。
 13. `HOST_ADDRESS="URI:webPort"`と`HOST_INFLUX_ADDRESS="URI:timestampdataPort"`を`.env.local`を記入する。
 14. `npx prisma db push; npx prisma generate`を実行する。
